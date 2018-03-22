@@ -20,6 +20,7 @@ mkdir -p pkg
 #Delete existing generated code and swagger
 find ./pkg -iname "*.go" -type f -delete
 find . -iname "*.json" -type f -delete
+find . -iname "*.protoset" -type f -delete
 
 dir=$(pwd | xargs basename)
 if [[ dir != "protos" ]]; then 
@@ -47,22 +48,25 @@ services=(
 )
 for service in ${services[@]}
 do
-
-
     mkdir -p ../pkg/weatherman/${service}
     docker run -i --rm -v $(pwd):/protos --entrypoint /bin/bash  -w /protos protoc-bash -s <<EOF 
     echo "Generating go code for service ${service}"
     mkdir -p gen 
-    protoc -I/protos/${service} -I /protos/external /protos/${service}/*.proto --go_out=plugins=grpc:./gen
+    protoc -I/protos/${service} -I /protos/external /protos/${service}/*.proto --go_out=plugins=grpc:./gen --descriptor_set_out=${service}_svc.protoset --include_imports 
 EOF
     find ./ -iname "*.go" -exec mv {} ../pkg/${app}/${service}  \;
+    find ./ -iname "*.protoset" -exec mv {} ../protosets/ \;
 done
 echo "Done with services"
 
 ## Build Base Svc
-echo "Building base ${app} service"
-docker run --rm -v $(pwd):/protos --entrypoint /bin/bash  -w /protos protoc-bash -c 'mkdir -p gen && protoc -I. -I /protos/external weatherman_svc.proto --go_out=plugins=grpc:./gen'
+docker run -i --rm -v $(pwd):/protos --entrypoint /bin/bash  -w /protos protoc-bash -s <<EOF
+  echo "Building base ${app} service"
+  mkdir -p gen
+  protoc -I. -I /protos/external ${app}_svc.proto --go_out=plugins=grpc:./gen --descriptor_set_out=${app}_svc.protoset --include_imports 
+EOF
 find ./ -iname "*.go" -exec mv {} ../pkg/${app}/  \;
+find ./ -iname "*.protoset" -exec mv {} ../protosets/ \;
 
 #cleanup
 cleanTempGeneratedPaths
