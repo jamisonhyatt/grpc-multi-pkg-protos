@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/external/location";
+package location;
+
+message City {
+    string name = 1;
+    State state = 2;
+}
+
+enum State {
+    FORGOT_ZERO = 0;
+    ALABAMA = 1;
+    ALASKA = 2;
+    ARIZONA = 3;
+    ARKANSAS = 4;
+    CALIFORNIA = 5;
+    COLORADO = 6;
+    CONNECTICUT = 7;
+    DELAWARE = 8;
+    FLORIDA = 9;
+    GEORGIA = 10;
+    HAWAII = 11;
+    IDAHO = 12;
+    ILLINOIS = 13;
+    INDIANA = 14;
+    IOWA = 15;
+    KANSAS = 16;
+    KENTUCKY = 17;
+    LOUISIANA = 18;
+    MAINE = 19;
+    MARYLAND = 20;
+    MASSACHUSETTS =21 ;
+    MICHIGAN = 22;
+    MINNESOTA = 23;
+    MISSISSIPPI = 24;
+    MISSOURI = 25;
+    MONTANA = 26;
+    NEBRASKA = 27;
+    NEVADA = 28;
+    NEW_HAMPSHIRE = 29;
+    NEW_JERSEY = 30;
+    NEW_MEXICO = 31;
+    NEW_YORK = 32;
+    NORTH_CAROLINA = 33;
+    NORTH_DAKOTA = 34;
+    OHIO = 35;
+    OKLAHOMA = 36;
+    OREGON = 37;
+    PENNSYLVANIA = 38;
+    RHODE_ISLAND = 39;
+    SOUTH_CAROLINA = 40;
+    SOUTH_DAKOTA = 41;
+    TENNESSEE = 42;
+    TEXAS = 43;
+    UTAH = 44;
+    VERMONT = 45;
+    VIRGINIA = 46;
+    WASHINGTON = 47;
+    WEST_VIRGINIA = 48;
+    WISCONSIN = 49;
+    WYOMING = 50;
+}

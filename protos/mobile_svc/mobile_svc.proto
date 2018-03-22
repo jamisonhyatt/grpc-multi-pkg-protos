@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman/mobile";
+package mobile;
+
+import "location/location.proto";
+import "weather/weather.proto";
+
+service Mobile {
+    rpc GetWeather(GetWeatherRequest) returns (GetWeatherResponse) {};
+}
+
+message GetWeatherRequest{
+    location.City city = 1;
+}
+message GetWeatherResponse{
+    weather.Forecast forecast = 1;
+}

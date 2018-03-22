@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman/desktop";
+package desktop;
+
+import "location/location.proto";
+import "weather/weather.proto";
+import "weather/hurricanes.proto";
+
+service Desktop {
+    rpc GetWeather(GetWeatherRequest) returns (GetWeatherResponse) {};
+}
+
+message GetWeatherRequest{
+    location.City city = 1;
+}
+message GetWeatherResponse{
+    weather.Forecast forecast = 1;
+    weather.ExtendedForecast extended_forecast = 2;
+    weather.Hurricane  active_hurricane = 3;
+}

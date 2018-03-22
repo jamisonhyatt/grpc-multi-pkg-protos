@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/external/weather";
+
+package weather;
+
+message Hurricane {
+    string name = 1;
+    Category category = 2;
+}
+
+enum Category {
+    ONE = 0;
+    TWO = 1;
+    THREE = 2;
+    FOUR = 3;
+    FIVE = 4;
+}

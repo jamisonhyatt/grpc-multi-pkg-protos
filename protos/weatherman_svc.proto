@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman";
+package weatherman;
+
+// Root Weatherman Service
+service Weatherman {
+    // Get service health
+    rpc Healthcheck(HealthCheckRequest) returns (HealthCheckResponse) {};
+}
+
+message HealthCheckRequest{}
+message HealthCheckResponse{
+    // Whether the service is overall healthy.
+    bool healthy = 1;
+}

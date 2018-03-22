@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/external/weather";
+package weather;
+
+message Forecast {
+    string date = 1;
+    bool rain = 2;
+    float humidity = 3;
+    int32 temp = 4;
+}
+
+message ExtendedForecast {
+    repeated Forecast forecasts = 1;
+}
