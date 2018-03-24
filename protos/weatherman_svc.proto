@@ -1,15 +1,31 @@
 syntax = "proto3";
 
 option go_package = "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
 package weatherman;
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
 
 // Root Weatherman Service
 service Weatherman {
     // Get service health
-    rpc Healthcheck(HealthCheckRequest) returns (HealthCheckResponse) {};
+    rpc Healthcheck(google.protobuf.Empty) returns (HealthCheckResponse) {
+        option (google.api.http) = {
+                post: "/v1/weatherman/health"
+                body: "*"
+        };
+    };
 }
 
-message HealthCheckRequest{}
 message HealthCheckResponse{
     // Whether the service is overall healthy.
     bool healthy = 1;

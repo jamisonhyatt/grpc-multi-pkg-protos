@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/gogo/protobuf/types"
 	"github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/external/weather"
 	"github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman"
 	desktop "github.com/jamisonhyatt/grpc-multi-pkg-protos/pkg/weatherman/desktop_svc"
@@ -66,7 +67,7 @@ func (m *mobileService) GetWeather(ctx context.Context, req *mobile.GetWeatherRe
 
 type weathermanService struct{}
 
-func (w *weathermanService) Healthcheck(ctx context.Context, req *weatherman.HealthCheckRequest) (*weatherman.HealthCheckResponse, error) {
+func (w *weathermanService) Healthcheck(ctx context.Context, in *types.Empty) (*weatherman.HealthCheckResponse, error) {
 	return &weatherman.HealthCheckResponse{
 		Healthy: true,
 	}, nil

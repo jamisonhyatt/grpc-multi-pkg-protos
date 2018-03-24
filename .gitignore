@@ -1,2 +1,6 @@
 .vscode
 cmd/debug
+swift/
+*.swift
+java/
+*.java
