@@ -1,7 +1,4 @@
-# Go
-# Build your Go project.
-# Add steps that test, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/go
+#Doesn't work currently - default go pipeline file that doesn't know about protos
 
 trigger:
 - master
