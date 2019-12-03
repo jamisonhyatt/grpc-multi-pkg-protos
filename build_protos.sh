@@ -41,7 +41,7 @@ do
 done
 echo "Done with external dependencies"
 
-# Svcs
+# Services
 services=(
     desktop_svc
     mobile_svc
